@@ -1,0 +1,337 @@
+1.
+
+Public                              
+
+accessible from everywhere
+
+Private                            
+
+accessible only inside a class or a structure
+
+Protected                        
+
+accessible inside the class and in all classes that derive from that class
+
+Internal              
+
+access is limited exclusively to classes defined within the current project
+
+Protected Internal 
+
+access modifier is a combination of protected and internal. As a result, we can access the protected internal member only in the same assembly or in a derived class
+
+Private Protected
+
+access members inside the containing class or in a class that derives from a containing class, but only in the same assembly(project)
+
+2.
+
+3.
+
+initializes a newly created object of that type
+
+4.
+
+The partial keyword indicates that other parts of the class, struct, or interface can be defined in the namespace.
+
+5.
+
+a data structure which consists of the multiple parts
+
+
+6.
+
+define a reference type that provides built-in functionality for encapsulating data
+
+7.
+
+
+8.
+
+A field is a variable of any type that is declared directly in a class. 
+
+A property is a member that provides a flexible mechanism to read, write or compute the value of a private field.
+
+9.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1.
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Text.RegularExpressions;
+public class Test
+{
+    public static void Main(string[] args)
+    {
+        int[] numbers = GenerateNumbers();
+        Reverse(numbers);
+        PrintNumbers(numbers);
+    }
+ 
+    public static int[] GenerateNumbers() {
+        return new int[] {10,1,2,3,4,5,6,7,8,9};
+    }
+ 
+    public static void Reverse(int[] a) {
+        Array.Sort(a);
+    }
+ 
+    public static void PrintNumbers(int[] a) {
+        foreach(var i in a)
+            Console.Write(i + " ");
+        Console.WriteLine();
+    }
+}
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+2.
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Text.RegularExpressions;
+public class Test
+{
+    public static void Main(string[] args)
+    {
+        for(int i = 1; i < 11; i++) {
+            Console.WriteLine(Fibonacci(i));
+        }
+    }
+ 
+    public static int Fibonacci (int num) {
+        int a = 1;
+        int b = 1;
+ 
+        if (num <= 2)
+            return 1;
+ 
+        for (int i = 0; i < num - 2; i++) {
+            int temp = b;
+            b = a + b;
+            a = temp;
+        }
+ 
+        return b;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+3.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Text.RegularExpressions;
+public class Test
+{
+    public static void Main(string[] args)
+    {
+ 
+    }
+ 
+    public abstract class Person {
+        private int Age {get;set;}
+        private decimal Salary {get;set;}
+        private string Addresses {get;set;}
+    }
+ 
+    public class Instructor : Person {
+        private string department {get;set;}
+        private decimal bonus {get;set;}
+    }
+ 
+    public class Student : Person {
+        private ArrayList<course_info> courses {get;set;}
+ 
+        private float GPA {get;set;}
+        class course_info{
+            private string name;
+            private string grade;
+        }
+    }
+ 
+    public class Course {
+        private Dictionary<string, List<string>> a = new Dictionary<string, List<string>>();
+ 
+        public void print_list() {
+            foreach(var i in a)
+            {
+                Console.Write(i.Key + "   " );
+ 
+                foreach(var j in a[i.Key]){
+                    Console.Write(j + " ");
+                }
+ 
+                Console.WriteLine();
+            }
+        }
+ 
+    }
+ 
+    public class Department {
+        private string department_name;
+        private string department_head;
+ 
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Text.RegularExpressions;
+public class Test
+{
+    public static void Main(string[] args)
+    {
+        Ball a = new Ball(10, 100, 100, 100);
+        a.thorw_me();
+        a.thorw_me();
+        a.thorw_time();
+        a.pop();
+        a.thorw_me();
+        a.thorw_me();
+        a.thorw_time();
+    }
+ 
+    public class Color  {
+        private int red;
+        private int blue;
+        private int green;
+        private int alpha;
+ 
+        public Color(int red,int blue, int green, int alpha) {
+            this.red = red;
+            this.blue = blue;
+            this.green = green;
+            this.alpha = alpha;
+        }
+ 
+        public Color(int red,int blue, int green) {
+ 
+            if(red >= 0 || red <= 255)
+                this.red = red;
+            if(blue >= 0 || blue <= 255)
+                this.blue = blue;
+            if(green >= 0 || green <= 255)
+                this.green = green;
+ 
+            this.alpha = 255;
+        }
+ 
+        public void Colorinstance(int red, int blue, int green, int alpha) {
+            if(red >= 0 || red <= 255)
+                this.red = red;
+            if(blue >= 0 || blue <= 255)
+                this.blue = blue;
+            if(green >= 0 || green <= 255)
+                this.green = green;
+            if(alpha >= 0 || alpha <= 255)
+                this.alpha = alpha;
+        }
+ 
+        public int grayscale() {
+            return ((this.red + this.blue + this.green) / 3);
+        }
+ 
+        public void print() {
+            Console.WriteLine("red " + this.red);
+            Console.WriteLine("blue " + this.blue);
+            Console.WriteLine("green " + this.green);
+            Console.WriteLine("alpha " + this.alpha);
+        }
+    }
+ 
+    public class Ball : Color {
+        private int size_ball {get;set;}
+        private int Throw {get;set;} = 0;
+        public Ball(int size, int red,int blue, int green) : base(red, blue, green) {
+            this.size_ball = size;
+        }
+ 
+        public void pop() {
+            this.size_ball = 0;
+        }
+ 
+        public void thorw_me() {
+            if (this.size_ball > 0)
+                this.Throw++;        
+        }
+ 
+        public void thorw_time() {
+            Console.WriteLine(this.Throw);    
+        }
+    }
+}
